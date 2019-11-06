@@ -1,6 +1,6 @@
 #!/bin/bash
-dpkg --list > ~/list
-if grep nano ~/list
+if dpkg --list | grep nano
+
 then
 nano -V
 else
