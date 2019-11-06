@@ -4,5 +4,6 @@ if
 then
   nano -V
 else
+   
   echo "no nginx installed"
 fi
