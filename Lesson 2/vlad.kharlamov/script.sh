@@ -51,7 +51,7 @@ editStringNum=`cat $nginx_work_dir/nginx.conf|awk '/http {/{print NR+1}'`
 updateData
 if [ -z "$sitesAvailable" ]
 then
-awk -v line="$editStringNum" -v text="$includeSA" 'NR==line {print text};{print}' /etc/nginx/nginx.conf > /etc/nginx/output
+awk -v line="$editStringNum" -v text="$includeSA" 'NR==line {print text};{print}' $nginx_work_dir/nginx.conf > /etc/nginx/output
 count="1"
 else
 echo '"sites-available" found'
@@ -59,7 +59,7 @@ fi
 
 if [ -z "$sitesEnabled" ]
 then
-awk -v line="$editStringNum" -v text="$includeSE" 'NR==line+1 {print text};{print}' /etc/nginx/output > /etc/nginx/nginx.conf
+awk -v line="$editStringNum" -v text="$includeSE" 'NR==line+1 {print text};{print}' $nginx_work_dir/output > /etc/nginx/nginx.conf
 
 if [[ "$count" > "0" ]]
 then
