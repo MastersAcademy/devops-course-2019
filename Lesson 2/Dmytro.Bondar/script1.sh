@@ -1,9 +1,9 @@
 #!/bin/bash
-if dpkg --list | grep nano
+if dpkg --list | grep nginx
 
 then
-nano -V
+nginx -V
 else
- echo "no nginx instaled"
+ echo "no nginx installed"
 fi
 
