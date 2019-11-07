@@ -20,7 +20,8 @@ cd /etc/nginx/;
 mkdir sites-available/ sites-enabled/;
 ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/;
 
-service nginx restart;
+# service nginx restart; # for Docker
+systemctl restart nginx.service;
 
 curl GET localhost:80 | grep -o "Welcome to nginx!" | head -1;
 
