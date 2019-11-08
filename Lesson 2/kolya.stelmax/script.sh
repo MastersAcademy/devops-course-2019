@@ -22,7 +22,8 @@ echo `nginx -v`;
 
 cd /etc/nginx/;
 mkdir sites-available/ sites-enabled/;
-mv etc/nginx/conf.d/default.conf etc/nginx/sites-available #if the file in conf$
+mv etc/nginx/conf.d/default.conf etc/nginx/sites-available
+#if the file in conf.d you need to use this line of code
 ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/;
 
 service nginx restart
