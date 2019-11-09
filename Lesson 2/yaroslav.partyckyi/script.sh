@@ -54,9 +54,9 @@ ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/;
 
 service nginx restart;
 
-echo -e "\n\n\n"
+echo -e "\n"
 curl 127.0.0.1 | grep -o "Welcome to nginx!"
-echo -e "\n\n\n"
+echo -e "\n"
 
 
 
