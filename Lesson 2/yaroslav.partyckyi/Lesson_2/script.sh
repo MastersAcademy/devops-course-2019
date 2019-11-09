@@ -5,23 +5,58 @@ function checkNginx {
     nginx -v
 }
 
+
+
 echo -e "\n . . . running script"
 echo -e "\n . . . list of programs:"
 
 apt list --installed
 
-if command -v nginx
-then 
+if [[ `command -v nginx` ]]
+then
     checkNginx
-
+    
     apt remove nginx nginx-common -y
     apt purge nginx nginx-common -y
     apt autoremove -y
-
+    
     echo -e  "\n . . . nginx has been deleted"
-else 
+else
     echo -e  "\n . . . nginx not found"
 fi
+
+
+
+echo -e "\n . . . installing nginx\n"
+
+apt update && apt install -y curl gnupg2 ca-certificates lsb-release
+
+echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
+	| tee /etc/apt/sources.list.d/nginx.list 
+curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
+
+apt-key fingerprint ABF5BD827BD9BF62
+apt update
+apt-get install nginx
+
+checkNginx
+
+cd /etc/nginx/
+mkdir sites-available/ sites-enabled/
+mv nginx.conf tempo.nginx.conf
+sed '/include \/etc\/nginx\/conf.d\/\*.conf;/a \\tinclude /etc/nginx/sites-enabled/\*.conf;' tempo.nginx.conf > nginx.conf
+rm tempo.nginx.conf
+
+mv /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/;
+ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/;
+
+service nginx restart;
+
+echo -e "\n\n\n"
+curl 127.0.0.1 | grep -o "Welcome to nginx!"
+echo -e "\n\n\n"
+
+
 
 
 
