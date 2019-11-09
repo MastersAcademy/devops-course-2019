@@ -8,11 +8,11 @@ nginx_setup=$(dpkg -l nginx)
 nginx_version=$(nginx -v)
 #  1.1. Если он есть. Удалить и вывести текст об удалении. Также указать, какая версия была удалена. 
 #  1.2. Если его нет, вывести текст что он не установлен в системе.
-if [ "$nginx_setup" == "dpkg-query: no packages found matching nginx" ]
+if [ "$nginx_setup" != "dpkg-query: no packages found matching nginx" ];
 then
 	echo "Check version nginx"
 	echo "$nginx_version"
-	sudo remove apt nginx
+	apt remove nginx
 	echo "$nginx_version is remooved"
 else
 	#2. Добавить внешнее репо nginx: (документация на репо. http://nginx.org/en/linux_packages.html#Ubuntu) и установить nginx 1.14.2.
@@ -24,7 +24,7 @@ else
 	apt update && apt install -y nginx
 	service nginx start
 fi
-echo nginx installed
+echo "nginx installed"
 
 #  2.1. Добавить папки sites-available и sites-enabled в корень конфигурационной папки nginx. Добавить папку sites-enabled в nginx.conf. 
 mkdir /etc/nginx/sites-available
@@ -45,13 +45,13 @@ service nginx restart
 
 # 2.3. Сделать запрос к nginx и получить в результате выполнения скрипта: “Welcome to nginx!”
 
-recvest_to_nginx=`echo wget localhost:80 -O -`
-echo "$recvest_to_nginx"
+request_to_nginx=`echo wget localhost:80 -O -`
+echo "$request_to_nginx"
 
 #3. Узнать и вывести PID nginx master process. Сделать это с помощью awk.
 
-pid_nginx=$(pgrep nginx)
-
+#pid_nginx=$(pgrep nginx)
+pid_nginx=$(ps | grep bash | awk '{print $1}')
 #pid_nginx=top | awk nginx
  
 #   Результат форматировать:  “Nginx main process have a PID: {число} “
