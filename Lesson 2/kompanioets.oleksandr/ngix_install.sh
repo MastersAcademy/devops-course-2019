@@ -51,7 +51,7 @@ echo "$request_to_nginx"
 #3. Узнать и вывести PID nginx master process. Сделать это с помощью awk.
 
 #pid_nginx=$(pgrep nginx)
-pid_nginx=$(ps | grep bash | awk '{print $1}')
+pid_nginx=$(ps | grep nginx | awk '{print $1}')
 #pid_nginx=top | awk nginx
  
 #   Результат форматировать:  “Nginx main process have a PID: {число} “
