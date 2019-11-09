@@ -1,35 +1,37 @@
 #!/bin/bash
 
 function checkNginx {
-    echo -e "\n . . . nginx found:"
+    echo -e "\n . . . nginx version:"
     nginx -v
 }
 
 
 
 echo -e "\n . . . running script"
-echo -e "\n . . . list of programs:"
+echo -e "\n . . . list of programs:\n"
 
 apt list --installed
 
 if [[ `command -v nginx` ]]
 then
     checkNginx
-    
+
+    echo -e "\n . . . nginx will be removed:\n"
+
     apt remove nginx nginx-common -y
     apt purge nginx nginx-common -y
     apt autoremove -y
     
-    echo -e  "\n . . . nginx has been deleted"
+    echo -e  "\n . . . nginx has been deleted\n"
 else
     echo -e  "\n . . . nginx not found"
 fi
 
 
 
-echo -e "\n . . . installing nginx\n"
+echo -e "\n . . . installing nginx of version 1.14.2\n"
 
-apt update && apt install -y curl gnupg2 ca-certificates lsb-release
+apt install -y curl gnupg2 ca-certificates lsb-release
 
 echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
 	| tee /etc/apt/sources.list.d/nginx.list 
@@ -37,7 +39,7 @@ curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
 
 apt-key fingerprint ABF5BD827BD9BF62
 apt update
-apt-get install nginx
+apt install nginx=1.14.2-1~disco
 
 checkNginx
 
@@ -58,8 +60,8 @@ echo -e "\n\n\n"
 
 
 
+echo -e "\n . . . nginx processes:\n"
+echo "Nginx main process have a PID: `ps -fC nginx | grep master | awk '{print $2}'`" 
+echo -e "Nginx number of 'worker' processes: \e[1;31m`ps -fC nginx | grep -c worker`"
 
-
-
-
-
+exit 0;
