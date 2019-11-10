@@ -46,7 +46,7 @@ mkdir /etc/nginx/conf.d/sites-available
 mkdir /etc/nginx/conf.d/sites-enabled
 echo 'adding directories - done'
 echo 'adding sites-enabled to nginx.conf...'
-sed '/include.*conf/ a \ \ \ \ \ \ \ \ include /etc/nginx/sites-enabled/*;' > nginx.conf1
+sed '/include.*conf/ a \ \ \ \ \ \ \ \ include /etc/nginx/sites-enabled/*;' > nginx.tmp
 cat nginx.tmp > nginx.conf
 rm nginx.tmp
 echo 'adding sites-enabled to nginx.conf - done'
