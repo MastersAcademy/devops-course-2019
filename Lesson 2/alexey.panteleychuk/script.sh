@@ -1,30 +1,15 @@
 #!/bin/bash
 
-#variables
-program="htop"
-if [ -n "$1" ]
-then
-  program=$1
-fi
+set -x
 
-echo "Start script"
+ echo "enter your package name";
+    read name;
 
-apt list >> tempfile
-
-if grep $program tempfile; then 
-  echo "I'm find \"$program\""
-   #$program -v ;
-
-
-
-  rm tempfile
-  exit 1;
-fi
-
-
-
-# delete tempfile
-rm tempfile; 
-
-echo "All done";
+    dpkg -s $name  1>/dev/null;
+        if [ $? -ne 0 ]; then
+            echo $name "not installed" && sudo apt-get update && sudo apt-get install $name
+          else
+            dpkg -l $name && sudo apt remove -y $name;
+        fi
 exit 1;
+
