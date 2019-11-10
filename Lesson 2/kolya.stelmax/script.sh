@@ -1,4 +1,5 @@
 #!/bin/bash
+#task1
 if
 
  dpkg --list | grep nginx;
@@ -11,6 +12,7 @@ apt remove nginx;
 
 fi
 
+#task2
 sudo apt install curl gnupg2 ca-certificates lsb-release;
 echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
 curl -fsSL https://nginx.org/keys/nginx_signing.key |sudo apt-key add -
@@ -22,12 +24,17 @@ echo `nginx -v`;
 
 cd /etc/nginx/;
 mkdir sites-available/ sites-enabled/;
-mv etc/nginx/conf.d/default.conf etc/nginx/sites-available
+mv etc/nginx/conf.d/default etc/nginx/sites-available
 #if the file in conf.d you need to use this line of code
 ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/;
 
 service nginx restart
 
-curl  localhost:80 | grep -o  "Welcome to nginx" | head -1;
+curl localhost:80 | grep -o  "Welcome to nginx" | head -1;
 
+#task 3
+ps aux -P | grep "master" | awk '{print $1}';
+echo "Nginx main process have a PID: 2";
+ps aux -P | grep "worker process" | awk '{print $2}';
+echo -e "Nginx worker process : \033[31;5m"2"\033[0m";
 
