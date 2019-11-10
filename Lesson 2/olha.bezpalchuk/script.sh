@@ -67,5 +67,5 @@ PID="$(ps aux | grep -i /nginx.*master/ | awk '{ print $2 }')"
 echo "Nginx main process have a PID: ${PID}"
 
 #3.1 show number of nginx worker processes. Use formatting as for p.3 plus red color
-PID="$(ps aux | grep -c /nginx.*worker/ | awk '{ print $2 }')"
-echo -e "\e[31mNginx worker process have a PID: ${PID}\e[39m"
+PID="$(ps aux | grep -c -i /nginx.*worker/ | awk '{ print $1 }')"
+echo -e "\e[31mNumber of nginx worker processes: ${PID}\e[39m"
