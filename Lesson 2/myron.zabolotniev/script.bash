@@ -33,6 +33,6 @@ curl -X GET 127.0.0.1 | grep -o "Welcome to nginx"
 #3 
 
 ps aux | awk '/nginx master/ {print "Nginx main process have a PID:", $2}'
-echo "Nginx worker process count: $(tput setaf 1)$(ps aux | awk '/nginx worker/' | wc -l)${reset}"
+echo "Nginx worker process count: $(tput setaf 1)$(ps aux | awk '/nginx worker/' | wc -l)$(tput sgr0)"
 
 
