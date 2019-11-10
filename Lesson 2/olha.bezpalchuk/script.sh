@@ -62,7 +62,10 @@ echo 'default configs - done'
 #2.3 make request to nginx and get Welcome to nginx message
 curl -s 127.0.0.1 | grep -o 'Welcome to nginx' | head -1
 
-
 #3 discover and show PID nginx master process. Do it using awk. Format result..
-#3.1 show number of nginx worker processes. Use formatting as for p.3 plus red color
+PID="$(ps aux | grep -i /nginx.*master/ | awk '{ print $2 }')"
+echo "Nginx main process have a PID: ${PID}"
 
+#3.1 show number of nginx worker processes. Use formatting as for p.3 plus red color
+PID="$(ps aux | grep -i /nginx.*worker/ | awk '{ print $2 }')"
+echo -e "\e[31mNginx worker process have a PID: ${PID}\e[39m"
