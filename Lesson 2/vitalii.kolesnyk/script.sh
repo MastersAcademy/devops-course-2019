@@ -16,7 +16,7 @@ fi
 
 # Задание 2
 
-apt update -y
+apt update
 apt install -y curl gnupg2 ca-certificates lsb-release
 echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" > /etc/apt/sources.list.d/nginx.list
 curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
@@ -33,6 +33,12 @@ curl localhost | grep title
 # Задание 3
 
 psID=`ps -lfC nginx | grep "master" | awk '{print $4}'`;
-pss=`ps -lfC nginx | grep -c "^[0-9]"`;
+pssa=`ps -lfC nginx | grep -c "^[0-9]"`;
+pss=$(($pssa-1))
+if [[ $pssa -ne 0 ]]
+then
 echo "Nginix main process have a PID: $psID";
 echo -e "nginx worker process: \e[31m $pss \e[0m";
+else
+echo "Nginix dead";
+fi
