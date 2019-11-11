@@ -50,7 +50,7 @@ mkdir /etc/nginx/conf.d/sites-available
 mkdir /etc/nginx/conf.d/sites-enabled
 debugMessage 'adding directories - done'
 debugMessage 'adding sites-enabled to nginx.conf...'
-cat /etc/nginx/nginx.conf | sed '/include.*conf/ a \ \ \ \ include /etc/nginx/sites-enabled/*;' > nginx.tmp
+cat /etc/nginx/nginx.conf | sed '/include.*conf/ a \ \ \ \ include /etc/nginx/conf.d/sites-enabled/*;' > nginx.tmp
 cat nginx.tmp > /etc/nginx/nginx.conf
 rm nginx.tmp
 debugMessage 'adding sites-enabled to nginx.conf - done'
