@@ -150,10 +150,10 @@ sudo service nginx start
 nginxStart
 if [ -n "$nginxStatus" ] && [ -n "$nginxMainProcess" ]
 then
-#echo -e "\e[32mStarted\e[0m"
+echo -e "\e[32mStarted\e[0m"
 echo `curl  http://127.0.0.1 2> /dev/null |awk '/Welcome/{gsub(/[<]title[\/>]|[<][\/]title[>]/,"");print $1" "$2" "$3;exit}'`
 echo "Nginx main process have a PID: $nginxMainProcess"
-echo -e "Nginx PIDs: \e[31m"`sudo ps aux | grep  "master\|worker" | awk '/nginx/{print $2}'` "\e[0m"
+echo -e "Nginx PIDs: \e[31m"`sudo ps aux | grep  "worker" | awk '/nginx/{count++}END{print count}'` "\e[0m"
 else
 echo "Nginx not started. Repair with you hands"
 exit 1
