@@ -44,5 +44,5 @@ curl 127.0.0.1 |  grep -om 1 "Welcome to nginx"
 LRED='\033[1;31m'
 echo -n
 awk '{print "Nginx main process have a PID:"; print $0}' /var/run/nginx.pid #NGINX main process PID
-echo -en "Nginx number of 'worker' processes: $LRED $(ps -aux | grep nginx | grep -c workeR)" #Number s in bold red color
+echo -en "Nginx number of 'worker' processes: $LRED $(ps -aux | grep nginx | grep -c worker)" #Number s in bold red color
 
