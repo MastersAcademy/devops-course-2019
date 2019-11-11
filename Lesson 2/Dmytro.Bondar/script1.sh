@@ -24,6 +24,7 @@ fi
 echo "Installing nginx"
 sudo apt install curl gnupg2 ca-certificates lsb-release --yes
 echo "deb [arch=amd64] http://nginx.org/packages/ubuntu bionic nginx"  | tee /etc/apt/sources.list.d/nginx.list
+curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
 apt update
 apt install nginx=1.14.2* --yes
 #Task 2.1
