@@ -31,7 +31,7 @@ echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
 curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
 apt-key fingerprint ABF5BD827BD9BF62
 
-apt update &> /dev/null
+apt update
 apt install -y nginx=1.14.2-1~bionic
 
 nginx -v
@@ -44,7 +44,7 @@ mkdir -p sites-available/ sites-enabled/
 awk '1;/include.*conf/{print "include /etc/nginx/sites-enabled/*;"}' backup_nginx.conf > nginx.conf
 
 #2.2
-cp /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/
+mv /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/
 ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
 service nginx restart
 
