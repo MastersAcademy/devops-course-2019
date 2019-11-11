@@ -24,7 +24,7 @@ echo `nginx -v`;
 
 cd /etc/nginx/;
 mkdir sites-available/ sites-enabled/;
-mv etc/nginx/conf.d/default etc/nginx/sites-available
+mv etc/nginx/conf.d/default.conf etc/nginx/sites-available
 #if the file in conf.d you need to use this line of code
 ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/;
 
@@ -33,8 +33,9 @@ service nginx restart
 curl localhost:80 | grep -o  "Welcome to nginx" | head -1;
 
 #task 3
-ps aux -P | grep "master" | awk '{print $1}';
-echo "Nginx main process have a PID: 2";
-ps aux -P | grep "worker process" | awk '{print $2}';
-echo -e "Nginx worker process : \033[31;5m"2"\033[0m";
+
+ps -lfC nginx | grep 'master' | awk '{print "Nginx main process have a PID:" $4}';
+#formatting result: Nginx main process have a PID
+ps -lfC nginx | grep 'worker' | awk '{print "Nginx worker process: \33[0;31m" $1}';
+#formatting result: Nginx worker process
 
