@@ -33,12 +33,6 @@ curl localhost | grep title
 # Задание 3
 
 psID=`ps -lfC nginx | grep "master" | awk '{print $4}'`;
-pssa=`ps -lfC nginx | grep -c "^[0-9]"`;
-pss=$(($pssa-1))
-if [[ $pssa -ne 0 ]]
-then
+pss=`ps -lfC nginx |grep "worker" | grep -c "^[0-9]"`;
 echo "Nginix main process have a PID: $psID";
 echo -e "nginx worker process: \e[31m $pss \e[0m";
-else
-echo "Nginix dead";
-fi
