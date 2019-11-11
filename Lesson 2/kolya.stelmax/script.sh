@@ -26,7 +26,7 @@ cd /etc/nginx/;
 mkdir sites-available/ sites-enabled/;
 sed -i 'include /etc/nginx/sites-enabled/\*.conf' /etc/nginx/nginx.conf
 # -i for line breaks
-mv etc/nginx/conf.d/default.conf etc/nginx/sites-available
+mv /etc/nginx/conf.d/default.conf /etc/nginx/sites-available
 #if the file in conf.d you need to use this line of code
 ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/;
 
