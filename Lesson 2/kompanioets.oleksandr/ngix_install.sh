@@ -1,10 +1,14 @@
 #!/bin/bash
 set -x
 	
-	sudo su
+if [[ $(id -u) -ne 0 ]]; 
+then
+  echo "Please run script as root"
+  exit 1	
+fi
 
 #  1. Вывести список установленных программ и проверить, если в этом списке nginx. 
-	nginx_setup=$(dpkg -l nginx)
+	nginx_setup=$(apt list --installed | grep nginx)
 	nginx_version=$(nginx -v)
 #  1.1. Если он есть. Удалить и вывести текст об удалении. Также указать, какая версия была удалена. 
 #  1.2. Если его нет, вывести текст что он не установлен в системе.
@@ -21,7 +25,7 @@ else
 	echo "to import key"
 	curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
 	echo "Install nginx"
-	apt update && apt install -y nginx
+	apt update && apt install -y nginx=1.14.2-1~bionic
 	service nginx start
 fi
 	echo "nginx installed"
@@ -60,6 +64,6 @@ fi
 #    Форматировать так же как в задании 3, но число процессов должны быть красным.
 	RED=$(\033[0;31m) #set red color
 	NC='\033[0m'	#set no color
-	process_count=$(ps | grep nginx | wc | awk '{print $2}')
+	process_count=$(ps -lfC nginx | grep worker | wc -l)
 	echo "Nginx worker process: ${RED}$process_count${NC}"
 	
