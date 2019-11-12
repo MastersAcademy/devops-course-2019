@@ -6,7 +6,7 @@ sitesAvailable=`cat /etc/nginx/nginx.conf|awk '/sites-available/{print $1}'`
 sitesEnabled=`cat /etc/nginx/nginx.conf|awk '/sites-enabled/{print $1}'`
 }
 
-includeSA="    include /etc/nginx/sites-available/*.conf;"
+
 includeSE="    include /etc/nginx/sites-enabled/*.conf;"
 
 version=`dpkg -l |grep 'ii\s\snginx\s' | awk '{print $3}'`
