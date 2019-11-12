@@ -1,10 +1,22 @@
 #!/bin/bash
 
+if [ "$EUID" -ne 0 ]
+then
+  echo ' . . . permission denied, please run as root'
+  exit
+fi
+
+
+
 function checkNginx {
     echo -e "\n . . . nginx version:"
     nginx -v
 }
-
+if [ "$EUID" -ne 0 ]
+then
+  echo 'Please run as root'
+  exit
+fi
 
 
 echo -e "\n . . . running script"
@@ -31,6 +43,7 @@ fi
 
 echo -e "\n . . . installing nginx of version 1.14.2\n"
 
+apt update
 apt install -y curl gnupg2 ca-certificates lsb-release
 
 echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
