@@ -6,5 +6,5 @@ COPY script.sh script.sh
 RUN chmod +x script.sh
 CMD ["bash", "./script.sh"]
 
-FROM default as nginx  
+FROM default as nginx
 RUN apt install -y nginx

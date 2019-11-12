@@ -12,11 +12,7 @@ function checkNginx {
     echo -e "\n . . . nginx version:"
     nginx -v
 }
-if [ "$EUID" -ne 0 ]
-then
-  echo 'Please run as root'
-  exit
-fi
+
 
 
 echo -e "\n . . . running script"
