@@ -22,9 +22,11 @@ curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
 sudo apt update
 sudo apt install nginx
 
-mkdir /etc/nginx/sites-available
-mkdir /etc/nginx/sites-enabled
-sudo echo "/etc/nginx/sites-enabled" >> sudo /etc/nginx/nginx.conf
+sudo mkdir /etc/nginx/sites-available
+sudo mkdir /etc/nginx/sites-enabled
+# sudo echo "/etc/nginx/sites-enabled" >> sudo /etc/nginx/nginx.conf
+sudo sh -c "echo 'include /etc/nginx/sites-enabled/*.conf;' >> /etc/nginx/conf.d/dep.conf"
+
 sudo mv /etc/nginx/conf.d/default.conf  /etc/nginx/sites-available/default.conf
 sudo ln -sf /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 service nginx restart
