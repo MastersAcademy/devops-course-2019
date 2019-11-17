@@ -1,10 +1,10 @@
 #!/bin/bash
 
-set -x
+#set -x
 # sudo check
 id=$(id -u);
 
-if [ "$id -ne 0 ]
+if [ "$id" -ne 0 ]
 	then echo "Run script by sudo"
 	exit 0;
 fi
@@ -21,12 +21,13 @@ if
 fi
 
 # task 2
-apt install curl gnupg2 ca-certificates lsb-release --yes
-echo "deb [arch=amd64] http://nginx.org/packages/ubuntu bionic nginx" | tee /etc/apt/sources.list.d/nginx.list
+apt install curl gnupg2 ca-certificates lsb-release
+echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
+	| tee /etc/apt/sources.list.d/nginx.list
 curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
-apt-key fingerprint ABF5BD827BD9BF62
-apt update --yes
-apt install nginx=1.14.2* --yes
+#apt-key fingerprint ABF5BD827BD9BF62
+apt update
+apt install nginx=1.14.2*
 
 cp /etc/nginx/nginx.conf /etc/nginx/nginxbckp.conf
 mkdir /etc/nginx/sites-available/ /etc/nginx/sites-enabled/
@@ -41,7 +42,7 @@ curl 127.0.0.1 | grep -om 1 "Welcome to nginx"
 # task 3
 
 ps -lfC nginx | grep 'master' | awk '{print "Nginx main process have a PID:" $4}';
-ps -lFC nginx | grep 'worker' | awk '{print "Nginx worker process: \33[0;31m" $1};
+ps -lFC nginx | grep 'worker' | awk '{print "Nginx worker process: \33[0;31m" $1}';
 #LRED='\033[1;31m'
 #echo -n
 #awk '{print "Nginx main process have a PID:"; print $0}' /var/run/nginx.pid
