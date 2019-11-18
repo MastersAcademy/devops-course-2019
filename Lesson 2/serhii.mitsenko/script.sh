@@ -10,7 +10,7 @@ then
    echo "Nginx isn't install"
 else
    apt show nginx | sed '2!d'
-   apt purge nginx
+   apt purge -y nginx
    echo "Nginx removed"
 fi
 
@@ -33,7 +33,7 @@ curl -X GET 127.0.0.1 | grep -o "Welcome to nginx!" | head -1;
 
 # Task №3
 pid_master=$(ps aux | grep nginx | awk '{print $2}' | sed '1!d')
-pid_all=$(($(ps aux | grep -c nginx)-1))
+pid_all=$(($(ps aux | grep -c nginx)-2))
 if [[ $pid_all -eq 0 ]]
 then
    echo "Nginx doesn't work"
