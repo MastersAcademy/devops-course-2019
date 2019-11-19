@@ -21,4 +21,26 @@ fi
 	apt update
 	apt install -y nginx
 	echo 'nginx -v'
+
+	mkdir /etc/nginx/sites-available /etc/nginx/sites-enabled;
+	cp /etc/nginx/nginx.conf /etc/nginx/backup_nginx.conf;
+	sed -i '$ d' /etc/nginx/nginx.conf && echo -e "    include /etc/nginx/sites-enabled/\*.conf;\n}">> /etc/nginx/nginx.conf;
+	cp /etc/nginx/conf.d/default.conf  /etc/nginx/conf.d/backup_default.conf;
+	mv /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/;
+	ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/;
+
+	service nginx start;
 	
+	curl 'http://127.0.0.1' -so - | grep -iPo '(?<=<title>)(.*)(?=</title>)';
+	ngX_master_PID=`ps aux | grep "[n]ginx: master" | awk '{print $2}'`;
+	ngX_numb_of_proc=`ps aux | grep "[n]ginx: worker" | grep -c "[0-9]"`;
+
+if [ $ngX_numb_of_proc != 0 ]
+then
+	echo "Nginx master process PID: $ngX_master_PID";
+	echo "Nginx worker process count:  $ngX_numb_of_proc ";
+else
+	echo "service nginx stopped";
+fi
+
+exit 0;
