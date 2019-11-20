@@ -37,7 +37,7 @@ fi
 if [ $ngX_numb_of_proc != 0 ]
 then
 	echo "Nginx master process PID: $ngX_master_PID";
-	echo -e "Nginx worker process count: \033[0;31m $ngX_numb_of_proc  ";
+	echo -e "Nginx worker process count: \033[0;31m $ngX_numb_of_proc \033[0m ";
 else
 	echo "service nginx stopped";
 fi
