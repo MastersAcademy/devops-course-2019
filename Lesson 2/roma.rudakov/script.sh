@@ -5,7 +5,7 @@ if [[ $(id -u) -ne 0 ]]
     exit 0;
 fi
 dpkg --get-selections | grep -q nginx;
-if [ $? != 0]
+if [ $? != 0 ]
 then
 	echo "nginx is not installed";
 else 
@@ -13,13 +13,12 @@ else
 	nginx -v;
 	apt remove -y nginx;
 fi 
-	sudo apt install curl gnupg2 ca-certificates lsb-release
-	echo "deb http://nginx.org/packages/debian `lsb_release -cs` nginx" \
-    		| sudo tee /etc/apt/sources.list.d/nginx.list
-	curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
-	sudo apt-key fingerprint ABF5BD827BD9BF62
-	apt update
-	apt install -y nginx
+
+	sudo apt-get install --assume-yes curl gnupg2 ca-certificates lsb-release;
+	echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list;
+	curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -;
+	apt-get update
+	apt-get install -y nginx=1.14.2*;
 	echo 'nginx -v'
 
 	mkdir /etc/nginx/sites-available /etc/nginx/sites-enabled;
