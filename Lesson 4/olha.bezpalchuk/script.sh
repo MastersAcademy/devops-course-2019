@@ -40,7 +40,7 @@ curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
 apt-key fingerprint ABF5BD827BD9BF62
 apt-get -y update
 # apt-get -y install nginx=1.14.2-1~xenial
-apt-get -y install nginx=1.14.2-1~bionic
+apt-get -y install nginx=1.14.2*
 debugMessage 'installing nginx 1.14.2 - done'
 nginx -v
 
