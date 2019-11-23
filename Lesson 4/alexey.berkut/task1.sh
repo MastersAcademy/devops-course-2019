@@ -4,5 +4,6 @@ apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E8
 apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'; # Add Docker repo in APT
 apt update || apt install -y docker-engine;
 usermod -aG docker sailor;
-service status docker;
+systemctl start docker.service;
+docker run --rm ubuntu:16.04;
 
