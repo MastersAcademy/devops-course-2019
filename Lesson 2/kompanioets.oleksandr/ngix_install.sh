@@ -18,12 +18,13 @@ then
 	nginx_version=$(nginx -v)
 	echo "$Nginx verion is $nginx_version"
 	apt purge -y nginx*
+	apt-get autoremove
 	echo "$nginx_version is remooved"
 	exit 1
 else
 	#2. Добавить внешнее репо nginx: (документация на репо. http://nginx.org/en/linux_packages.html#Ubuntu) и установить nginx 1.14.2.
 	echo "connect repo"
-	apt update && apt install -y curl gnupg2 ca-certificates lsb-release
+	apt-get update && apt-get install -y curl gnupg2 ca-certificates lsb-release
 	echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" | tee /etc/apt/sources.list.d/nginx.list
 	echo "to import key"
 	curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
@@ -40,14 +41,15 @@ mkdir /etc/nginx/sites-enabled
 echo "folders sites-available and sites-enabled is added"
 echo "-------------------------------------------------"
 echo "add folder sites-enabled in nginx.conf."
-echo "include /etc/nginx/sites-enabled/*;" >> /etc/nginx/nginx.conf
-sed -i 'include /etc/nginx/sites-enabled/\*.conf' /etc/nginx/nginx.conf
+cp /etc/nginx/nginx.conf /etc/nginx/beckup_nginx.conf
+sed -i  "include /etc/nginx/sites-enabled/*;" >> /etc/nginx/nginx.conf
+#sed -i 'include /etc/nginx/sites-enabled/\*.conf' /etc/nginx/nginx.conf
 #  2.2. Перенести файл default.conf в папку sites-available  и сделать симлинк этого файла в папку sites-enabled.
 #	cp /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 mv /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/
-ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
+ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled
 #    После чего перезапустить nginx.
-
+nginx -t
 service nginx restart
 
 # 2.3. Сделать запрос к nginx и получить в результате выполнения скрипта: “Welcome to nginx!”
