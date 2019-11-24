@@ -33,7 +33,7 @@ apt install nginx=1.14.2* --yes
 cd /etc/nginx
 mkdir sites-available
 mkdir sites-enabled
-sed '/http {/a include /etc/nginx/sites-enabled/*.conf' /etc/nginx/nginx.conf
+sed -i '/http {/a include /etc/nginx/sites-enabled/*.conf;' /etc/nginx/nginx.conf
 #Task 2.2
 mv /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/
 ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
