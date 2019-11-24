@@ -12,11 +12,12 @@ fi
 	nginx_version=$(nginx -v)
 #  1.1. Если он есть. Удалить и вывести текст об удалении. Также указать, какая версия была удалена. 
 #  1.2. Если его нет, вывести текст что он не установлен в системе.
-if [ "$nginx_setup" != "0" ]
+if [ "$nginx_setup" != "0" ];
 then
 	echo "Check version nginx"
 	echo "$nginx_version"
 	apt remove -y nginx
+	apt autoremove
 	echo "$nginx_version is remooved"
 else
 	#2. Добавить внешнее репо nginx: (документация на репо. http://nginx.org/en/linux_packages.html#Ubuntu) и установить nginx 1.14.2.
