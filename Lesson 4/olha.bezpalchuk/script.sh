@@ -31,13 +31,12 @@ fi
 debugMessage '\t===== task 2 ====='
 debugMessage 'installing nginx 1.14.2...'
 # install the prerequisites
+apt-get -y update
 apt-get -y install curl gnupg2 ca-certificates lsb-release
 # set up the apt repository for stable nginx packages
 echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" | tee /etc/apt/sources.list.d/nginx.list
 # import an official nginx signing key so apt could verify the packages authenticity
 curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
-# verify key
-apt-key fingerprint ABF5BD827BD9BF62
 apt-get -y update
 # apt-get -y install nginx=1.14.2-1~xenial
 apt-get -y install nginx=1.14.2*
