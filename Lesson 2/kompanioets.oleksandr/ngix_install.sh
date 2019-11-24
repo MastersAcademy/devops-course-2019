@@ -78,3 +78,4 @@ fi
 	process_count=$(ps -lfC nginx | grep worker | wc -l)
 	echo "Nginx worker process: ${RED}$process_count${NC}"
 	echo "the end script/n______________________________"
+	echo ""
