@@ -31,7 +31,7 @@ echo `nginx -v`;
 
 cd /etc/nginx/;
 mkdir sites-available/ sites-enabled/;
-sed -i '15iinclude /etc/nginx/sites-enabled/\*.conf' /etc/nginx/nginx.conf
+sed -i '/http {/a include /etc/nginx/sites-enabled/\*.conf;' /etc/nginx/nginx.conf
 # -i for line breaks
 mv /etc/nginx/conf.d/default.conf /etc/nginx/sites-available
 #if the file in conf.d you need to use this line of code
@@ -39,10 +39,11 @@ ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/;
 
 service nginx restart
 
-curl localhost:80 | grep -o  "Welcome to nginx" | head -1;
+curl 127.0.0.1 | grep c  "Welcome to nginx" | head -1;
 
 #task 3
 ps -lfC nginx | grep 'master' | awk '{print "Nginx main process have a PID:" $4}';
 #formatting result: Nginx main process have a PID
-ps -lfC nginx | grep 'worker' | awk '{print "Nginx worker process: \33[0;31m" $1}';
+ps -lfC nginx | grep 'worker' | awk '{print "Nginx worker process: \33[1;31m" $1}';
 #formatting result: Nginx worker process
+
