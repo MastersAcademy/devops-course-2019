@@ -11,7 +11,6 @@ includeSE="    include /etc/nginx/sites-enabled/*.conf;"
 
 version=`dpkg -l |grep 'ii\s\snginx\s' | awk '{print $3}'`
 
-apt update && apt install -y sudo
 if [ -n "$version" ]
 then
 	echo "Nginx found. Do you want remove? [Y/n]"
