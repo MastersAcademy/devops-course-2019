@@ -1,5 +1,11 @@
 #!/bin/bash
-apt-get update
+
+if [[ "$EUID" -ne 0 ]];
+ then
+  echo "Please run script as root"
+  exit 1;
+fi
+
 if
 
  dpkg --list | grep nginx;
@@ -14,7 +20,7 @@ fi
 
 #task2
 apt install curl gnupg2 ca-certificates lsb-release;
-echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" |  tee /etc/apt/sources.list.d/nginx.list
+echo "deb http://nginx.org/packages/mainline/ubuntu `lsb_release -cs` nginx" |  tee /etc/apt/sources.list.d/nginx.list
 curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
 apt-key fingerprint ABF5BD827BD9BF62 #key authenticity
 apt update
