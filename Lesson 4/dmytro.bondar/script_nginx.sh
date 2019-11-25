@@ -22,6 +22,7 @@ else
 fi
 #Task 2
 echo "Installing nginx"
+apt update
 apt install curl gnupg2 ca-certificates lsb-release --yes
 #echo "deb http://nginx.org/packages/ubuntu 'lsb_release -cs' nginx" | tee /etc/apt/sources.list.d/nginx.list
 echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
