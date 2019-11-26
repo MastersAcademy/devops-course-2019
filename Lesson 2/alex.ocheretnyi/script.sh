@@ -13,14 +13,14 @@ else
  echo "Nginx is not installed on your system."
 fi
 
-apt update
-apt install curl gnupg2 ca-certificates lsb-release
+apt update -y
+apt install curl gnupg2 ca-certificates lsb-release -y
 
 echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list
-curl -fsSL https://nginx.org/keys/nginx_signig.key | sudo apt-key add -
+curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
 
-apt update
-apt install nginx=1.14.2*
+apt update -y
+apt install -y nginx=1.14.2*
 
 cd /etc/nginx && sudo mkdir sites-available sites-enabled
 
