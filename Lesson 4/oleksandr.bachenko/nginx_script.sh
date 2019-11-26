@@ -24,10 +24,12 @@ apt install nginx=1.14.2* --yes
 
 cp /etc/nginx/nginx.conf /etc/nginx/nginxbckp.conf
 mkdir /etc/nginx/sites-available/ /etc/nginx/sites-enabled/
-sed -i '/http {/a include /sites-enabled/\*.conf;' /etc/nginx/nginx.conf
+sed -i '/http {/a include /etc/nginx/sites-enabled/*.conf;' /etc/nginx/nginx.conf
 mv /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/
 ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
 service nginx restart
+
+curl 127.0.0.1 |  grep -om 1 "Welcome to nginx"
 
 pspid=$(ps -lfC nginx | grep master | awk '{print $4}');
 #filepid=$(cat /var/run/nginx.pid);
