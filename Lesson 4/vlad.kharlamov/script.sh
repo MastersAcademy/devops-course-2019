@@ -12,19 +12,18 @@ includeSE="    include /etc/nginx/sites-enabled/*.conf;"
 version=`dpkg -l |grep 'ii\s\snginx\s' | awk '{print $3}'`
 
 apt update && apt install -y sudo
-
 if [ -n "$version" ]
 then
-	echo "Nginx found. Do you want remove? [y/N]"
+	echo "Nginx found. Do you want remove? [Y/n]"
 	read -s -n 1 nginxInstall
 
-	if [[ $nginxInstall = "y" ]]
+	if [[ $nginxInstall =~ ^[Nn][Oo]* ]]
 	then
-		echo "Removing..."
-	else
 		echo "Exited by user"
-                echo $nginxInstall
-                exit 0
+		echo $nginxInstall
+		exit 0
+	else
+		echo  "Removing..."
 	fi
 
 rem_output=$(sudo apt remove -y nginx 2> /dev/null)
@@ -36,7 +35,14 @@ rem_version=`echo $rem_output|grep -o -h -w -m 1 "[0-9]\{1,\}\.[0-9]\{1,3\}\.[0-
 	exit 0
 else
 
-	echo -e "\e[31mNginx not found, Installing...\e[0m"
+	echo -e "\e[31mNginx not found, do you want to install? [Y,n]\e[0m"
+	read -s -n 1 nginxInstall
+	if [[ $nginxInstall =~ ^[Nn][Oo]* ]]
+	then
+		echo "Exited by user"
+		echo $nginxInstall
+		exit 0
+	fi
 fi
 
 
@@ -91,22 +97,22 @@ fi
 
 updateData
 
-#if [[ "$count" > "0" ]]
-#then
-#	if [ -n "$sitesAvailable" ]
-#	then
-#		rm $nginx_work_dir/output
-#		
-#		if [ -n "$sitesEnabled" ]
-#		then
-#			echo "Include for nginx added"
-#		else
-#			echo "sites-available not found"
-#		fi
-#	else
-#		echo "sites-enabled not found"
-#	fi
-#fi
+if [[ "$count" > "0" ]]
+then
+	if [ -n "$sitesAvailable" ]
+	then
+		rm $nginx_work_dir/output
+		
+		if [ -n "$sitesEnabled" ]
+		then
+			echo "Include for nginx added"
+		else
+			echo "sites-available not found"
+		fi
+	else
+		echo "sites-enabled not found"
+	fi
+fi
 
 mv $nginx_work_dir/conf.d/default.conf $nginx_work_dir/sites-available/ 2> /dev/null
 
@@ -133,25 +139,33 @@ nginxMainProcess=`sudo ps aux | awk '/nginx.conf$/{print $2}'`
 
 nginxStart
 
-#echo $nginxStatus
-#echo $nginxMainProcess
+echo $nginxStatus
+echo $nginxMainProcess
 
 if [ -n "$nginxStatus" ] && [ -n "$nginxMainProcess" ]
 then
 	echo "Nginx main process have a PID: $nginxMainProcess"
 else
-	echo "Start the Nginx"
+	echo "Nginx not running. Start? [Y/n]"
+	read -s -n 1 nginxStart
+
+	if [[ "$nginxStart"  =~ ^[Yy][Ee]* ]]
+	then
+		echo "Start the Nginx"
 		sudo service nginx start
 		nginxStart
 		if [ -n "$nginxStatus" ] && [ -n "$nginxMainProcess" ]
 		then
-			echo -e "\e[32mNginx running\e[0m"
+			echo -e "\e[32mStarted\e[0m"
 			echo `curl  http://127.0.0.1 2> /dev/null |awk '/Welcome/{gsub(/[<]title[\/>]|[<][\/]title[>]/,"");print $1" "$2" "$3;exit}'`
 			echo "Nginx main process have a PID: $nginxMainProcess"
-			echo -e "Nginx worker PIDs: \e[31m"`sudo ps aux | grep  "worker" | awk '/nginx/{count++}END{print count}'`"\e[0m"
+			echo -e "Nginx worker PIDs: \e[31m"`sudo ps aux | grep  "worker" | awk '/nginx/{count++}END{print count}'` "\e[0m"
 		else
-			echo "Nginx not started :("
+			echo "Nginx not started. Repair with you hands"
 			exit 1
 		fi
+	else 
+	echo "Exit"
+	fi
 
 fi
