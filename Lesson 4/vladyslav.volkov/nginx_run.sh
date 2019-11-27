@@ -20,7 +20,7 @@ apt-get update
 apt-get install nginx=1.14.2* -y
 
 mkdir /etc/nginx/sites-available /etc/nginx/sites-enabled
-sed -i '15iinclude     /etc/nginx/sites-enabled/\*.conf;' /etc/nginx/nginx.conf
+sed -i '/http {/a include /etc/nginx/sites-enabled/*.conf;' /etc/nginx/nginx.conf
 mv /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/default.conf
 ln -sf /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
 service nginx restart
