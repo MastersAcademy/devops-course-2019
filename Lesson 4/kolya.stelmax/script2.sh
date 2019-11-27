@@ -29,21 +29,14 @@ apt-get install -y  nginx=1.14.2-1~xenial
 
 echo `nginx -v`;
 
-cd /etc/nginx/;
-mkdir sites-available/ sites-enabled/;
-sed -i '/http {/a include /etc/nginx/sites-enabled/\*.conf;' /etc/nginx/nginx.conf
-# -i for line breaks
-mv /etc/nginx/conf.d/default.conf /etc/nginx/sites-available
-#if the file in conf.d you need to use this line of code
-ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/;
-
+mkdir /etc/nginx/sites-available /etc/nginx/sites-enabled
+sed -i '/http {/a include /etc/nginx/sites-enabled/*.conf;' /etc/nginx/nginx.conf
+mv /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/default.conf
+ln -sf /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/
 service nginx restart
+curl -X GET 127.0.0.1 | grep -o "Welcome to nginx!" | head -1
 
-curl 127.0.0.1 | grep c  "Welcome to nginx" | head -1;
-
-#task 3
-ps -lfC nginx | grep 'master' | awk '{print "Nginx main process have a PID:" $4}';
-#formatting result: Nginx main process have a PID
-ps -lfC nginx | grep 'worker' | awk '{print "Nginx worker process: \33[1;31m" $1}';
-#formatting result: Nginx worker process
-
+nginx_proc=$(ps -lfC nginx | grep "master process" | awk '{print $4}')
+nginx_proc_count=$(ps -lfC nginx | grep -c "worker process")
+echo "Nginx main process have a PID: $nginx_proc"
+echo -e "Number of Nginx working processes: \033[31m$nginx_proc_count\e[0m"

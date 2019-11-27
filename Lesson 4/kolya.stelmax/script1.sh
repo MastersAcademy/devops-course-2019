@@ -14,7 +14,7 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 apt update
 apt-get install -y docker-ce docker-ce-cli containerd.io
-adduser sailor --disabled-password
+adduser --disabled-password --gecos "" sailor
 usermod -aG docker sailor
-su -  sailor -c 'docker run --rm -it ubuntu:16.04'
+su -  sailor -c 'docker run --rm -it ubuntu:16.04 bash'
 
