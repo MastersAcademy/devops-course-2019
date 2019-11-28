@@ -10,7 +10,7 @@ COPY default.conf /etc/nginx/conf.d/
 
 WORKDIR /var/www/localhost/htdocs
 
-COPY WordPress/ .
+COPY wp-app/ .
 
 EXPOSE 80
 

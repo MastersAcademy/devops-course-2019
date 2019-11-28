@@ -1,8 +1,29 @@
-version: "2"
+version: '3'
 
 services:
-  py_nginx:
+  wordpress:
     build: .
     ports:
-      - 8181:80
+      - 80:80
+    depends_on:
+      - db
+    networks:
+      - wp-net
+
+  db:
+    image: mysql:5.7.21
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: admin
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - 3306:3306
+    volumes:
+      - "./data:/var/lib/mysql"
+    networks:
+      - wp-net
     
+networks:
+  wp-net: 
