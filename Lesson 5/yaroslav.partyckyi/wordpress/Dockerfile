@@ -12,6 +12,8 @@ WORKDIR /var/www/localhost/htdocs
 
 COPY wp-app/ .
 
+COPY wp-config.php .
+
 EXPOSE 80
 
 CMD ["/bin/sh", "-c", "/usr/sbin/php-fpm7; exec nginx -g 'daemon off;';"]
