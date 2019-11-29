@@ -1,6 +1,7 @@
 FROM alpine
 
 RUN apk update && \
+    apk add unzip && \
     apk add nginx && \
     apk add php-fpm && \
     apk add php-json && \
@@ -9,9 +10,13 @@ RUN apk update && \
 
 COPY default.conf /etc/nginx/conf.d/
 
-WORKDIR /var/www/localhost/htdocs
+WORKDIR /var/www/wp-app
 
-COPY wp-app/ .
+ADD https://wordpress.org/latest.zip .
+
+RUN unzip latest.zip && \
+    cp -r wordpress/* . && \
+    rm -r latest.zip wordpress;
 
 COPY wp-config.php .
 
