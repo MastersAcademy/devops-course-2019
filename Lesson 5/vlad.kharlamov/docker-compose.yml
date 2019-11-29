@@ -1,0 +1,8 @@
+version: "3"
+services:
+ nginx:
+   build: .
+   ports:
+      - 8181:80
+   container_name: v.kharlamov_image
+   image: v.kharlamov_image
