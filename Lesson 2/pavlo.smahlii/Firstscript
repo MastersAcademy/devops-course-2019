@@ -41,9 +41,9 @@ service nginx restart
 curl 127.0.0.1 | grep -om 1 "Welcome to nginx"
 
 # task 3
-
+REDL='\033[1;31m'
 ps -lfC nginx | grep 'master' | awk '{print "Nginx main process have a PID:" $4}';
-echo -en "Nginx number of worker processes: $RED $(ps -aux | grep nginx | grep -c worker)$RED"
+echo -en "Nginx number of worker processes: $REDL $(ps -aux | grep nginx | grep -c worker)$REDL"
 #ps -lFC nginx | grep 'worker' | awk '{print "Nginx worker process: \33[0;31m" $4}';
 #LRED='\033[1;31m'
 #echo -n
