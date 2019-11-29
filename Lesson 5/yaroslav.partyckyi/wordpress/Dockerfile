@@ -3,6 +3,7 @@ FROM alpine
 RUN apk update && \
     apk add nginx && \
     apk add php-fpm && \
+    apk add php-json && \
     apk add php-mysqli && \
     mkdir /run/nginx;
 
