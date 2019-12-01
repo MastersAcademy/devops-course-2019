@@ -67,8 +67,7 @@ pid_nginx=$(ps -ax | grep nginx | awk '{print $1}')
 echo "Nginx main process have a PID: $pid_nginx"
 #  3.1. Так же вывести количество запущенных nginx worker process. 
 #    Форматировать так же как в задании 3, но число процессов должны быть красным.
-RED=$(\033[0;31m) #set red color
-NC='\033[0m'	#set no color
+
 process_count=$(ps -lfC nginx | grep worker | wc -l)
-echo "Nginx worker process: ${RED}$process_count${NC}"
-echo "the end script/n______________________________"
+echo -e "Nginx worker process: \e[31m$process_count\e[0m"
+echo "SCRIPT THE END"
