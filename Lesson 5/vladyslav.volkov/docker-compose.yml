@@ -1,0 +1,6 @@
+version: "2"
+services:
+  nginx:
+    build: .
+    ports:
+    - "8181:80"
