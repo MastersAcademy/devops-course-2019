@@ -7,7 +7,7 @@ echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
 curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
 apt-key fingerprint ABF5BD827BD9BF62
 apt update
-apt install -y nginx
+apt install -y nginx curl
 
 cd /etc/nginx &&  mkdir sites-available/ sites-enabled/ 
 
