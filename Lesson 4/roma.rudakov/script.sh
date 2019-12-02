@@ -1,4 +1,4 @@
-#!/bin/bash
+\#!/bin/bash
 if [[ $(id -u) -ne 0 ]]
   then
     echo "Please run as root";
@@ -14,11 +14,11 @@ else
 	apt remove -y nginx;
 fi 
 
-	sudo apt-get install --assume-yes curl gnupg2 ca-certificates lsb-release;
+	apt-get install --assume-yes curl gnupg2 ca-certificates lsb-release;
 	echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" | sudo tee /etc/apt/sources.list.d/nginx.list;
 	curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -;
 	apt-get update
-	apt-get install -y nginx=1.14.2*;
+	apt-get install -y nginx=1.14.2-1~xenial
 	echo 'nginx -v'
 
 	mkdir /etc/nginx/sites-available /etc/nginx/sites-enabled;
