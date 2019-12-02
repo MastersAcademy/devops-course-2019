@@ -27,7 +27,7 @@ else
 	apt-get update && apt-get install -y curl gnupg2 ca-certificates lsb-release
 	echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" | tee /etc/apt/sources.list.d/nginx.list
 	echo "to import key"
-	curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
+	curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
 	apt-key fingerprint ABF5BD827BD9BF62
 	echo "Install nginx"
 	apt update && apt install -y nginx=1.14.2-1~bionic
@@ -42,8 +42,8 @@ echo "folders sites-available and sites-enabled is added"
 echo "-------------------------------------------------"
 echo "add folder sites-enabled in nginx.conf."
 cp /etc/nginx/nginx.conf /etc/nginx/beckup_nginx.conf
-sed -i  "include /etc/nginx/sites-enabled/*;" >> /etc/nginx/nginx.conf
-#sed -i 'include /etc/nginx/sites-enabled/\*.conf' /etc/nginx/nginx.conf
+echo 'include /etc/nginx/sites-enabled/*.conf;' >> /etc/nginx/conf.d/dep.conf
+
 #  2.2. Перенести файл default.conf в папку sites-available  и сделать симлинк этого файла в папку sites-enabled.
 #	cp /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 mv /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/
