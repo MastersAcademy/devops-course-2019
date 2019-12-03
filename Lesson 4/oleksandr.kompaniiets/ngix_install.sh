@@ -30,8 +30,7 @@ else
 	curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
 	apt-key fingerprint ABF5BD827BD9BF62
 	echo "Install nginx"
-	apt update && apt install -y nginx=1.14.2-1~bionic
-#	service nginx start
+	apt update && apt install -y nginx=1.14.2*
 fi
 	echo "nginx installed"
 
@@ -53,9 +52,6 @@ nginx -t
 service nginx restart
 
 # 2.3. Сделать запрос к nginx и получить в результате выполнения скрипта: “Welcome to nginx!”
-
-#	request_to_nginx=`echo wget localhost:80 -O -`
-#	echo "$request_to_nginx"
 
 curl -X GET 127.0.0.1 | grep -o "Welcome to nginx!" | head -1
 
