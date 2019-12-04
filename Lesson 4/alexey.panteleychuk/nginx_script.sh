@@ -23,7 +23,7 @@ if [ "$?" -ne 0 ]
         mkdir /etc/nginx/sites-available /etc/nginx/sites-enabled
         sed -i '/http {/a include /etc/nginx/sites-enabled/*.conf;' /etc/nginx/nginx.conf
         mv /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/default.conf
-        ln -sf /etc/nginx/sites-available/default.conf /etc/nginx/si 
+        ln -sf /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/defautl.conf 
 
         service nginx restart;
         curl -X GET 127.0.0.1 | grep -o "Welcome to nginx!" | head -1;
