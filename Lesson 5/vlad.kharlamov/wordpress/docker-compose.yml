@@ -1,0 +1,28 @@
+
+version: '3'
+services:
+ nginx:
+   build: .
+   ports:
+      - 8181:80
+   container_name: v.kharlamov_image
+   image: v.kharlamov_image
+   environment:
+             - DB_HOST=mysql
+   links:
+      - mysql
+ mysql:
+     volumes:
+       - ./mysql:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: ooLe2Kokiengee5v
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: aig8kae8lae4Daig
+     ports:
+        - 3306:3306
+     container_name: v.kharlamov_mysql
+     image: mysql:5.7
+
+
