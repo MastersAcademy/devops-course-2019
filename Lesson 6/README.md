@@ -36,7 +36,7 @@
 ## Задание 3(With asterisk):
 * Выполненное заданиие 1 и 2.
 * С помощь *aws cli* скачать картинку **cake.jpg** с *S3* корзины **ma-devops-bucket-with-image**. Добавить картинку на ваш веб-сервер.
-* Картинка должна быть доступна по пути https://*name-surname*.ma_devops.mocintra.com*/image/cake.jpg*
+* Картинка должна быть доступна по пути https://*name-surname*.ma-devops.mocintra.com/image/cake.jpg
 
 ### Tip's:
 * Ключи доступа можно найти в бакете: *masteracademy_devops_access*
