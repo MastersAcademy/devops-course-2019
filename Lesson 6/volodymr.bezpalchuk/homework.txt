@@ -1,0 +1,8 @@
+Task 1:
+63.33.189.248:8181
+
+Task 2:
+https://volodymyr-bezpalchuk.ma-devops.mocintra.com
+
+Task 3:
+https://volodymyr-bezpalchuk.ma-devops.mocintra.com/image/cake.jpg
