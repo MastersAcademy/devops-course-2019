@@ -1,0 +1,15 @@
+version: '3.6'
+
+services:
+
+  nginx:
+    container_name: ubuntu-nginx
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+
+    ports:
+      - "8181:80"
+
+

@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  wordpress:
+    build: .
+    ports:
+      - 80:80
+    depends_on:
+      - db
+    links:
+      - db
+
+  db:
+    container_name: wp-mysql
+    image: mysql:5.7.21
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - /var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
