@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  test_image:
+    build: .
+    ports:
+      - 8585:80
