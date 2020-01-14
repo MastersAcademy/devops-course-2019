@@ -28,7 +28,8 @@
 |  vitalii.kolesnyk	|  V 	|  V 	|  V 	|   	|	
 |  vlad.kharlamov	|  V 	|  V 	|  V 	|   	|	
 |  roma.rudakov  |	V  |	V  |    |    |		
+|  vitalii.orlovskyi  |    |    |  V 	|  V  |   
 |  alex.ocheretnyi  |	 V  |    |    |    |			
 |  dmitriy.pereiaslovec  |	 V  |     |    |    |			
 |  viktor.volynets  | 	V  |    |    |    |			
-|  vitalii.orlovskyi  |    |    |    	|  V  |
+
