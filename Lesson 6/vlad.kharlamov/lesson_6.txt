@@ -1,2 +1,8 @@
-54.72.89.164
-http://vlad.kharlamov.ma-devops.mocintra.com/image/cake.jpg
+Server IP: 34.254.181.248
+Login: ubuntu
+Key: from mentors-key.pub
+Domain https://srv.kharlamov.com.ua
+
+Access to AWS:
+https://475815370617.signin.aws.amazon.com/console
+masters / 9wZ*8zzLl^92kPrr
