@@ -112,7 +112,7 @@ resource "aws_spot_instance_request" "spot-request" {
   spot_type	= "one-time"
   security_groups = [ aws_security_group.security-group.name ]
   tags = {
-    Name = "ma-19-Bezpalchuk-Volodymyr-Spot"
+    Name = "volodymyr.bezpalchuk"
   }
 }
 
