@@ -1,0 +1,24 @@
+- hosts: aws
+  become: true
+
+  tasks:
+    - name: Install nginx 
+      apt: name=nginx update_cache=yes state=latest
+    - name: Start
+      service: name=nginx state=started
+    - name: Copy index.html 
+      copy:
+        src: ./index.html
+        dest: /usr/share/nginx/html/ 
+      become: yes
+    - name: copy files
+      copy:
+        src: ./hello.conf
+        dest: /etc/nginx/sites-enabled/
+    - name: Remove default file
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+    - name: restart nginx
+      service: name=nginx state=restarted
+      become: yes
