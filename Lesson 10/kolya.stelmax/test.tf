@@ -19,16 +19,17 @@ resource "aws_iam_group_policy_attachment" "policy-attach" {
   policy_arn = aws_iam_policy.policy.arn
 }
 
-resource "aws_iam_user" "user" {
-  name = "user-kolya-stelmax"
-}
-
 resource "aws_iam_group_membership" "team" {
   name = "group-membership-kolya-stelmax"
   users = [
-    aws_iam_user.user.name,
+         "kolya.stelmax"
   ]
   group = aws_iam_group.group.name
+}
+
+resource "aws_key_pair" "keypair" {
+  key_name   = "tf-keypair-kolya-Stelmax"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDlX2loth/yrGHblB8+BOhqx1cUnxug2CDVEXyC9h8beamWJRt/gXvHd6QSlol5bMHwzJ+Ek3VtM8cDnXKf1L3Fu7LBCj4OKJV7pAcrpGuroJEdmxntICIkevKCc9chyQWxElilmmcXYS/XgheZzqHGWCwEgopo3o4BptC24bSCeD8qLOgAk06zenbzx362JRS/TDlDUOICVarFVULJnzF8gTBG87YABxTJ20cO7uVwgvqRNclLX5wFFXefxwF6OoP2EroqNngSEiTqfuISu8H5OtRQekSBYQ7+HZaCkJKZOFZVpELhfCmvfkz95M7S2ns6FgBZOJDjlgXIDH12kulz root@khrystal"
 }
 
 resource "aws_security_group" "kolya-stelmax-sgrp" {
@@ -69,6 +70,7 @@ resource "aws_spot_instance_request" "spot-request" {
   instance_type   = "t3a.micro"
   count           = "1"
   spot_type       = "one-time"
+  key_name        = aws_key_pair.keypair.key_name
   security_groups = [aws_security_group.kolya-stelmax-sgrp.name]
   tags            = {
     Name          = "kolya-Stelmax"
