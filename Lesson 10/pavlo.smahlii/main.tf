@@ -1,11 +1,11 @@
 provider "aws" {
-  access_key = "AKIAZ6CCJOUN5BV6HPEF"
-  secret_key = "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"
+  access_key = ""
+  secret_key = ""
   region = "eu-west-1"
   profile = "pavlo.smahlii"
 }
-	#Access key ID - AKIAZ6CCJOUN5BV6HPEF
-	#Secret access key - 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
+	#Access key ID - 
+	#Secret access key - 
 
 resource "aws_key_pair" "tf-keypair" {
 	key_name	= "tf-keypair-pavlo-smahlii"
