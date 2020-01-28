@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    image: roma.rudakov_img
+    container_name: rudakov_img
+    ports:
+      - "8181:80"
