@@ -1,0 +1,6 @@
+FROM ubuntu:18.04
+RUN apt update && apt install nginx -y
+copy index.html /var/www/html/index.html
+RUN servise nginx restart
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
