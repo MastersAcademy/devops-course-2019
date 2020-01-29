@@ -1,3 +1,6 @@
+# UPD: 
+Если очень хочется *pipeline project* можете использовать его.
+
 ## Задание 1(Minimum):
 Создать на jenkins сервере freestyle project который:
 * Делает pull с репозитория.
