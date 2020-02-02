@@ -1,0 +1,3 @@
+vladvolkov/node_js_server:latest
+vladyslav.volkov
+http://3.11.194.230:3010/
