@@ -1,0 +1,8 @@
+Image at dockerhub:
+vladvolkov/node_js_server:latest
+
+Project at Jenkins:
+vladyslav.volkov
+
+Deployed application:
+http://3.11.194.230:3010/
