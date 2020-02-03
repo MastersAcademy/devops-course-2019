@@ -1,4 +1,0 @@
-ip addr: 18.203.231.101
-domain name: pavlo.smahlii.ma-devops.mocintra.com
-https://pavlo.smahlii.ma-devops.mocintra.com/
-https://pavlo.smahlii.ma-devops.mocintra.com/image/cake.jpg
