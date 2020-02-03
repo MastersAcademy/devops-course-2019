@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: ensure nginx is at the latest version
+      apt: name=nginx update_cache=yes state=latest
+    - name: start nginx
+      service:
+        name: nginx
+        state: started
+      become: yes  
+    - name: copy index.html file
+      copy:
+        src: ./index.html
+        dest: /usr/share/nginx/html/ 
+      become: yes
+    - name: copy the nginx config file and restart nginx
+      copy:
+        src: ./hello.conf
+        dest: /etc/nginx/sites-enabled/
+    - name: remove default config file
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+      become: yes
