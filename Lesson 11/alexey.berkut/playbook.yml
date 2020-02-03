@@ -1,0 +1,24 @@
+- hosts: server
+  become: true
+
+  tasks:
+    - name: Install
+      apt: name=nginx update_cache=yes state=latest
+    - name: Run
+      service: name=nginx state=started
+    - name: Copy index.html
+      copy:
+        src: ./index.html
+        dest: /usr/share/nginx/html/
+      become: yes
+    - name: Create config
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+      copy:
+        src: ./hello.conf
+        dest: /etc/nginx/sites-enabled/
+    - name: Restart
+      service: name=nginx state=restarted
+      become: yes
+
