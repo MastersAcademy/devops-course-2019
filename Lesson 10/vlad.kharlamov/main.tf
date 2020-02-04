@@ -8,7 +8,6 @@ default = "AKIAW5SGOL54UQG3AD7J"
 #}
 
 provider "aws" {
-  version = "~> 2.0"
   alias = "vlad_kharlamov_homework"
   access_key = var.access_key
 #  secret_key = var.secret_key
@@ -17,7 +16,7 @@ provider "aws" {
 
 resource "aws_key_pair" "key" {
   key_name   = "vlad.kharlamov"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtRNB0GTa2O3aUDm2XLnYA4mWIKo7fFNQW67Y1MmymC+78tSYG75ykf1tLm0lOsbUmcUjn6eDYOgxCs20PGwH6xHTJu1kZYTLICxzWxwChqodOL3uQUUYYdr27CRLjlxgu6FVXPrWZIaV6Dd42p5rvlTewD7fI9AHk7KapWCSInN2dIIUrT23CL/z/iE9r7FcKQmsTHnRDk5tcwCC87lK5FcfCXkINUrxODbLZlkzavkPPqTcDqup6IVRaWzDCpLq+Jb1vD2KpCWpgN6dJ89ujfMdxsLMedV5O6cts8V4BQ6R1gqL1kY6LB492stZ/nqxjGlAxCuVWFgEhPxXOepnt root@vlad-ubuntu"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQgQh7GPHnkcGQ5oHi4udUYERRlWJsCiLw8diPVmP0A1bf1LKmOLa3Ly15+Sst8P1lzNsQa23v5zZ7IJumD0dijwOCQYw0Nd/GJZV7NCnx7bn04e9n3OeOIynPsskF/z1EjCJn1ZE0BazA6SeyiETAYet3UhTseaAszg+8tHllYSsY+pyHMHdroE66mAmE56S5Ie6jotKaA/YEqL1KyFWCMkXaTEeca0CTfkLQMhQROgjMn04rVGjkuX7fleJgkyyg2FxXem38FwAPonUlVRDJlpyeeP9f4dw7bdyTxpoMUE+JpG/skGElN+YYsejIyN7KaGB9kszWFxBsFSerxvt3 root@vlad-ubuntu"
 }
 
 resource "aws_security_group" "tf_homework" {
@@ -68,5 +67,11 @@ resource "aws_ebs_volume" "tf_homework" {
 }
 
 module "s3" {
-  source = "./s3"
+ source = "./s3"
+}
+module "ecr" {
+ source = "./ecr"
+}
+module "task_2" {
+ source = "./2nd_task"
 }
